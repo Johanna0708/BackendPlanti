@@ -1,5 +1,9 @@
 package com.example.BackendPlanti;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Sensor {
 
     private int SID;
@@ -8,6 +12,7 @@ public class Sensor {
     public Sensor() {
     }
 
+    @Id
     public int getSID() {
         return SID;
     }

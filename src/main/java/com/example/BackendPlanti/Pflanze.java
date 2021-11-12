@@ -1,5 +1,9 @@
 package com.example.BackendPlanti;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Pflanze {
 
     private int PID;
@@ -12,6 +16,7 @@ public class Pflanze {
 
     public Pflanze() {}
 
+    @Id
     public int getPID() {
         return PID;
     }

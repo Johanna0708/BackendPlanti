@@ -18,7 +18,7 @@ public class DB {
 
 
         session.beginTransaction();
-        Pflanze student = session.load(Pflanze.class, input.longValue());
+        Pflanze student = session.load(Pflanze.class, input);
         session.flush();
         return student;
     }

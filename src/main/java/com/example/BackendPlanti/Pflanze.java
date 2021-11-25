@@ -6,7 +6,7 @@ import javax.persistence.Id;
 @Entity
 public class Pflanze {
 
-    private int PID;
+    private Integer PID;
     private String Name;
     private int Standort;
     private int Schwierigkeit;
@@ -17,11 +17,11 @@ public class Pflanze {
     public Pflanze() {}
 
     @Id
-    public int getPID() {
+    public Integer getPID() {
         return PID;
     }
 
-    public void setPID(int PID) {
+    public void setPID(Integer PID) {
         this.PID = PID;
     }
 

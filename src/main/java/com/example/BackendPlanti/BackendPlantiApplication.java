@@ -1,5 +1,7 @@
 package com.example.BackendPlanti;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -20,19 +22,51 @@ public class BackendPlantiApplication {
 
 	@GetMapping("/planti/show")
 	@CrossOrigin(origins = "http://localhost:8100")
-	public String viewStudents(@RequestParam(value = "id", defaultValue = "1") Integer id) {
+	public String viewPflanze(@RequestParam(value = "id", defaultValue = "1") Integer id) {
 		String PflanzenString = null;
 
-		Pflanze student = DB.CallPflanzeById(id);
+		Pflanze pflanze = DB.callPflanzeById(id);
 
 		ObjectMapper om = new ObjectMapper();
 		om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		try {
-			PflanzenString = om.writeValueAsString(student);
+			PflanzenString = om.writeValueAsString(pflanze);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
 
 		return PflanzenString;
+	}
+
+	@GetMapping(value = "/planti/showall", produces = "application/json")
+	@CrossOrigin(origins = "http://localhost:8100")
+	public String viewAllPlants() {
+		Pflanze[] studentList=new Pflanze[3];
+		String PflanzenString = null;
+		for (int i = 1; i < 4; i++) {
+			Pflanze pflanze = DB.callPflanzeById(i);
+			studentList[i - 1] = pflanze;
+		}
+		ObjectMapper om = new ObjectMapper();
+		om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		try {
+			PflanzenString = om.writerWithDefaultPrettyPrinter().writeValueAsString(studentList);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return PflanzenString;
+	}
+
+	@GetMapping("/planti/addsensor")
+	@CrossOrigin(origins = "http://localhost:8100")
+	public void addSensor(@RequestParam(value = "pid") Integer pid,
+						  @RequestParam(value = "link") String link) {
+
+		Sensor sensor = new Sensor();
+		sensor.setLink(link);
+		sensor.setPID(pid);
+		DB.persist(sensor);
+
+
 	}
 }

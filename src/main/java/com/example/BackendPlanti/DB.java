@@ -9,7 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class DB {
 
-    public static Pflanze CallPflanzeById(Integer input){
+    public static Pflanze callPflanzeById(Integer input){
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -21,5 +21,18 @@ public class DB {
         Pflanze student = session.load(Pflanze.class, input);
         session.flush();
         return student;
+    }
+
+    public static void persist(Object Eingabe){
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        SessionFactory factory = meta.getSessionFactoryBuilder().build();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        session.persist(Eingabe);
+        session.flush();
+        session.close();
     }
 }

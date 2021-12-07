@@ -12,6 +12,8 @@ public class Pflanze {
     private int Schwierigkeit;
     private String Merkmale;
     private String WissName;
+    private String Picture;
+
 
 
     public Pflanze() {}
@@ -64,4 +66,15 @@ public class Pflanze {
     public void setWissName(String wissName) {
         WissName = wissName;
     }
+
+    public String getPicture() {
+        return Picture;
+    }
+
+    public void setPicture(String picture) {
+        Picture = picture;
+    }
 }
+
+
+

@@ -41,9 +41,9 @@ public class BackendPlantiApplication {
 	@GetMapping(value = "/planti/showall", produces = "application/json")
 	@CrossOrigin(origins = "http://localhost:8100")
 	public String viewAllPlants() {
-		Pflanze[] studentList=new Pflanze[3];
+		Pflanze[] studentList=new Pflanze[6];
 		String PflanzenString = null;
-		for (int i = 1; i < 4; i++) {
+		for (int i = 1; i < 7; i++) {
 			Pflanze pflanze = DB.callPflanzeById(i);
 			studentList[i - 1] = pflanze;
 		}

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @SpringBootApplication
 @RestController
 public class BackendPlantiApplication {
@@ -41,16 +43,13 @@ public class BackendPlantiApplication {
 	@GetMapping(value = "/planti/showall", produces = "application/json")
 	@CrossOrigin(origins = "http://localhost:8100")
 	public String viewAllPlants() {
-		Pflanze[] studentList=new Pflanze[6];
+		ArrayList<Pflanze> pflanzenList;
 		String PflanzenString = null;
-		for (int i = 1; i < 7; i++) {
-			Pflanze pflanze = DB.callPflanzeById(i);
-			studentList[i - 1] = pflanze;
-		}
+		pflanzenList=DB.callAllPflanze();
 		ObjectMapper om = new ObjectMapper();
 		om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		try {
-			PflanzenString = om.writerWithDefaultPrettyPrinter().writeValueAsString(studentList);
+			PflanzenString = om.writerWithDefaultPrettyPrinter().writeValueAsString(pflanzenList);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

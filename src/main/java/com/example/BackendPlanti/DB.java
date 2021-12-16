@@ -6,6 +6,11 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DB {
 
@@ -18,9 +23,22 @@ public class DB {
 
 
         session.beginTransaction();
-        Pflanze student = session.load(Pflanze.class, input);
+        Pflanze pflanze = session.load(Pflanze.class, input);
         session.flush();
-        return student;
+        return pflanze;
+    }
+
+    public static ArrayList<Pflanze> callAllPflanze(){
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        SessionFactory factory = meta.getSessionFactoryBuilder().build();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        ArrayList<Pflanze> entries = (ArrayList<Pflanze>) session.createCriteria(Pflanze.class).list();
+        session.flush();
+        return entries;
     }
 
     public static void persist(Object Eingabe){

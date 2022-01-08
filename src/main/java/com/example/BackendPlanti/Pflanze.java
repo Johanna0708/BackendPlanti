@@ -13,6 +13,7 @@ public class Pflanze {
     private String Merkmale;
     private String WissName;
     private String Picture;
+    private String EnName;
 
 
 
@@ -73,6 +74,14 @@ public class Pflanze {
 
     public void setPicture(String picture) {
         Picture = picture;
+    }
+
+    public String getEnName() {
+        return EnName;
+    }
+
+    public void setEnName(String enName) {
+        EnName = enName;
     }
 }
 

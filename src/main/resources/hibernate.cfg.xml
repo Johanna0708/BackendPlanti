@@ -12,6 +12,7 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <mapping class="com.example.BackendPlanti.Pflanze"/>
         <mapping class="com.example.BackendPlanti.Sensor"/>
+        <mapping class="com.example.BackendPlanti.User"/>
     </session-factory>
 </hibernate-configuration>
 

@@ -53,4 +53,18 @@ public class DB {
         session.flush();
         session.close();
     }
+
+    public static User callUserByName(String input){
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        SessionFactory factory = meta.getSessionFactoryBuilder().build();
+        Session session = factory.openSession();
+
+
+        session.beginTransaction();
+        User user = session.load(User.class, input);
+        session.flush();
+        return user;
+    }
 }

@@ -45,7 +45,7 @@ public class BackendPlantiApplication {
 	public String viewAllPlants() {
 		ArrayList<Pflanze> pflanzenList;
 		String PflanzenString = null;
-		pflanzenList=DB.callAllPflanze();
+		pflanzenList = DB.callAllPflanze();
 		ObjectMapper om = new ObjectMapper();
 		om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		try {
@@ -67,5 +67,24 @@ public class BackendPlantiApplication {
 		DB.persist(sensor);
 
 
+	}
+
+
+	@GetMapping("/planti/getPW")
+	@CrossOrigin(origins = "http://localhost:8100")
+	public String getPW(@RequestParam(value = "name") String username) {
+		String UserString = null;
+
+		User user = DB.callUserByName(username);
+
+		ObjectMapper om = new ObjectMapper();
+		om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		try {
+			UserString = om.writeValueAsString(user.getPassword());
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		return UserString;
 	}
 }

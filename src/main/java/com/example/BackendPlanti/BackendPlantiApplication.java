@@ -87,4 +87,18 @@ public class BackendPlantiApplication {
 
 		return UserString;
 	}
+
+
+	@GetMapping("/planti/adduser")
+	@CrossOrigin(origins = "http://localhost:8100")
+	public void addUser(@RequestParam(value = "username") String username,
+						@RequestParam(value = "pw") String pw) {
+
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(pw);
+		DB.persist(user);
+
+
+	}
 }

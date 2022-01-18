@@ -67,4 +67,18 @@ public class DB {
         session.flush();
         return user;
     }
+
+    public static Sensor callSensorById(Integer input){
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        SessionFactory factory = meta.getSessionFactoryBuilder().build();
+        Session session = factory.openSession();
+
+
+        session.beginTransaction();
+        Sensor sensor = session.load(Sensor.class, input);
+        session.flush();
+        return sensor;
+    }
 }

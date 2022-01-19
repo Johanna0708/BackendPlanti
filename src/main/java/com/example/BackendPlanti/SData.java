@@ -1,7 +1,5 @@
 package com.example.BackendPlanti;
 
-import java.time.LocalDateTime;
-
 public class SData {
     private long time;
     private float moisture;

@@ -6,15 +6,12 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DB {
 
-    public static Pflanze callPflanzeById(Integer input){
+    public static Pflanze callPflanzeById(Integer input) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -28,7 +25,7 @@ public class DB {
         return pflanze;
     }
 
-    public static ArrayList<Pflanze> callAllPflanze(){
+    public static ArrayList<Pflanze> callAllPflanze() {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -41,7 +38,7 @@ public class DB {
         return entries;
     }
 
-    public static void persist(Object Eingabe){
+    public static void persist(Object Eingabe) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -54,7 +51,7 @@ public class DB {
         session.close();
     }
 
-    public static User callUserByName(String input){
+    public static User callUserByName(String input) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -68,7 +65,7 @@ public class DB {
         return user;
     }
 
-    public static Sensor callSensorById(Integer input){
+    public static Sensor callSensorById(Integer input) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -81,7 +78,8 @@ public class DB {
         session.flush();
         return sensor;
     }
-    public static ArrayList<Sensor> callAllSensor(){
+
+    public static ArrayList<Sensor> callAllSensor() {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();

@@ -16,8 +16,8 @@ public class Pflanze {
     private String EnName;
 
 
-
-    public Pflanze() {}
+    public Pflanze() {
+    }
 
     @Id
     public Integer getPID() {

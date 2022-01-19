@@ -81,4 +81,16 @@ public class DB {
         session.flush();
         return sensor;
     }
+    public static ArrayList<Sensor> callAllSensor(){
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+        SessionFactory factory = meta.getSessionFactoryBuilder().build();
+        Session session = factory.openSession();
+
+        session.beginTransaction();
+        ArrayList<Sensor> entries = (ArrayList<Sensor>) session.createCriteria(Sensor.class).list();
+        session.flush();
+        return entries;
+    }
 }

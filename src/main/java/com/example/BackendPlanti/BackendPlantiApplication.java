@@ -117,6 +117,27 @@ public class BackendPlantiApplication {
 
 	}
 
+	@GetMapping(value = "/planti/meinePflanzen", produces = "application/json")
+	@CrossOrigin(origins = "http://localhost:8100")
+	public String viewAllMyPlants() {
+		ArrayList<Pflanze> pflanzenList= new ArrayList<>();
+		ArrayList<Sensor> sensorList;
+		String MeinPflanzenString = null;
+		sensorList = DB.callAllSensor();
+		for (var i=0;i<sensorList.size(); i++){
+			Pflanze pflanze=DB.callPflanzeById(sensorList.get(i).getPID());
+			pflanzenList.add(pflanze);
+		}
+		ObjectMapper om = new ObjectMapper();
+		om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		try {
+			MeinPflanzenString = om.writerWithDefaultPrettyPrinter().writeValueAsString(pflanzenList);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return MeinPflanzenString;
+	}
+
 	@GetMapping("/planti/getData")
 	@CrossOrigin(origins = "http://localhost:8100")
 	public String getSensorData(@RequestParam(value = "SID") Integer SID) throws Exception {

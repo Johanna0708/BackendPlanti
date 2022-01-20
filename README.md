@@ -23,10 +23,10 @@ Führen Sie das Projekt mit `spring-boot:run` aus
 
 ## Aufbau der App
 ***
-* um die ein interkatives UI zu haben, führen Sie bitte das benannte  Frontend "Planti" (https://github.com/Johanna0708/Planti.git) aus
+* um ein interkatives UI zu erhalten, führen Sie bitte das bereits benannte  Frontend "Planti" (https://github.com/Johanna0708/Planti.git) aus
 
 1. BackendPlantiApplication:
-    * Hauptklase, beinhaltet die zum Starten notwendige Main-Funktion
+    * Hauptklasse, beinhaltet die zum Starten notwendige Main-Funktion
     * APIs:
       * http://localhost:8080/planti/show: Gibt eine einzelne Pflanze nach ihrer ID zurück
         * Parameter: 

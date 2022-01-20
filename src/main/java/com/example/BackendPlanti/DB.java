@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class DB {
 
+    //Ruft ein Pflanzenobjekt nach seiner PID aus der Datenbank ab
     public static Pflanze callPflanzeById(Integer input) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
@@ -25,6 +26,7 @@ public class DB {
         return pflanze;
     }
 
+    //Ruft eine Liste aller gespeicherten Pflanzen aus der Datenbank ab
     public static ArrayList<Pflanze> callAllPflanze() {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
@@ -38,6 +40,7 @@ public class DB {
         return entries;
     }
 
+    //Persistiert das eingegebene Objekt
     public static void persist(Object Eingabe) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
@@ -51,6 +54,7 @@ public class DB {
         session.close();
     }
 
+    //Ruft ein Nutzerobjekt (Nutzerdaten) nach seinem Nutzernamen aus der Datenbank ab
     public static User callUserByName(String input) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
@@ -65,6 +69,7 @@ public class DB {
         return user;
     }
 
+    //Ruft ein Sensorobjekt nach seiner SID aus der Datenbank ab
     public static Sensor callSensorById(Integer input) {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 
@@ -79,6 +84,7 @@ public class DB {
         return sensor;
     }
 
+    //Ruft eine Liste aller gespeicherten Sensoren aus der Datenbank ab
     public static ArrayList<Sensor> callAllSensor() {
         StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
 

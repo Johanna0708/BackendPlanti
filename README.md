@@ -17,25 +17,52 @@ Diese spezielle Bibliothek stellt dabei das Backend der Anwendung dar, welches z
 
 ## Setup
 ***
-Um dieses Projekt auszuführen, installieren Sie es lokal mit npm
+Um dieses Projekt auszuführen, installieren Sie es lokal mit 
 `maven install`;<br/>
 Führen Sie das Projekt mit `spring-boot:run` aus
 
 ## Aufbau der App
 ***
-* um die Daten aus der Datenbank abrufen zu können, muss das Backend "BackendPlanti" (https://github.com/Johanna0708/BackendPlanti.git) gestartet werden
+* um die ein interkatives UI zu haben, führen Sie bitte das benannte  Frontend "Planti" (https://github.com/Johanna0708/Planti.git) aus
 
-1. Tab:
-    * neue Pflanzen können durch den Add-Button hinzugefügt werden
-    * Anzeige, welche Pflanze mit welchem Sensor bereits vorhanden ist
-    * Meldung erscheint, wenn eine Pflanze gegossen werden muss
-    * Anzeigen des Bewässerungsverlaufs für die Pflanzen
+1. BackendPlantiApplication:
+    * Hauptklase, beinhaltet die zum Starten notwendige Main-Funktion
+    * APIs:
+      * http://localhost:8080/planti/show: Gibt eine einzelne Pflanze nach ihrer ID zurück
+        * Parameter: 
+          * ID: Die PID der geforderten Pflanze
+      * http://localhost:8080/planti/showall: Gibt eine Liste aller auf der Datenbank befindlichen Pflanzen zurück, quasi ein "Dump"
+      * http://localhost:8080/planti/addsensor: Persistiert ein Sensor-Objekt mit den eingegebenen Daten; Gibt nur "200" zurück
+        * Parameter:
+          * pid: PID der Pflanze, bei der der Sensor angebracht wurde
+          * link: TTN-StorageAPI-Link des zugehörigen Sensors
+      * http://localhost:8080/planti/getPW: Gibt das Passwort des eingegebenen Nutzers aus der Datenbank zurück
+        * Parameter:
+          * name: Nutzername des Nutzers, dessen Passwort abgerufen werden soll
+      * http://localhost:8080/planti/adduser: Persistiert ein User-Objekt mit den eingegebenen Nutzer-Daten; Gibt nur "200" zurück
+        * Parameter: 
+          * username: Nutzername, der persistiert werden soll
+          * pw: Passwort, das persisitert werden soll
+      * http://localhost:8080/planti/meinePflanzen: Gibt eine Liste aller Pflanzen, die einen Sensor haben zurück
+      * http://localhost:8080/planti/getData: Gibt einen Dump der von TTN gespeicherten Feuchtigkeitsdaten, versehen mit Zeitstempeln, zurück
+        * Parameter:
+          * SID: SID des abgerufenen Sensors
 
-2. Tab:
-    * Datenbank mit allen Pflanzen
-    * durch Klicken auf die Pflanzen werden Details zu diesen dargestellt
 
-3. Tab:
-    * Impressum mit Details zum Unternehmen
-    * Kartendarstellung (GoogleMaps API)
-    * Anmelde- bzw. Abmelde-Funktion /Registrierungsmöglichkeit
+2. DB:
+    * Klasse, welche die Persistenz/ORM-bezogenen Funktionen bietet
+    * Funktionen:
+      * callPflanzeById: Ruft ein Pflanzenobjekt nach seiner PID aus der Datenbank ab
+      * callAllPflanze: Ruft eine Liste aller gespeicherten Pflanzen aus der Datenbank ab
+      * persist: Persistiert das eingegebene Objekt
+      * callUserByName: Ruft ein Nutzerobjekt (Nutzerdaten) nach seinem Nutzernamen aus der Datenbank ab
+      * callSensorById: Ruft ein Sensorobjekt nach seiner SID aus der Datenbank ab
+      * callAllSensor: Ruft eine Liste aller gespeicherten Sensoren aus der Datenbank ab
+
+
+3. Miscellaneous:
+    * Diverse Funktionen, die so häufig vorkamen oder so lang waren, dass sie zwecks Lesbarkeit ausgelagert wurden
+    * Funktionen:
+      * getHTTPOutput: Ruft den Output des eingegeben Links ab und gibt diesen zurück
+      * MapObject: Wandelt das übergebene (einzelne) Objekt in einen String um
+      * MapObjectList: Wandelt die übergebene Array-Liste in einen String um

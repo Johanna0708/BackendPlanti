@@ -11,7 +11,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class Miscellaneous {
-    public static String getSensorOutput(String urlToRead) throws Exception {
+
+    //Ruft den Output des eingegeben Links ab und gibt diesen zurück
+    public static String getHTTPOutput(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -28,6 +30,7 @@ public class Miscellaneous {
         return result.toString();
     }
 
+    //Wandelt das übergebene (einzelne) Objekt in einen String um
     public static String MapObject(Object input) {
         String output = null;
         ObjectMapper om = new ObjectMapper();
@@ -40,6 +43,7 @@ public class Miscellaneous {
         return output;
     }
 
+    //Wandelt die übergebene Array-Liste in einen String um
     public static String MapObjectList(ArrayList input) {
         String output = null;
         ObjectMapper om = new ObjectMapper();
